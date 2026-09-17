@@ -1,438 +1,689 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shreya Pulickal Anup | AI & Robotics Portfolio</title>
-  <!-- Google Fonts & Lucide Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <style>
-    :root {
-      --bg: #090d16;
-      --card-bg: rgba(18, 24, 38, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --font-sans: 'Inter', sans-serif;
-      --font-mono: 'Fira Code', monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Background Glow */
-    .bg-glow {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1000px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(9, 13, 22, 0) 70%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Layout Container */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Header / Hero Section */
-    header {
-      padding: 80px 0 60px;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-
-    .profile-frame {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .profile-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 25px var(--accent-glow);
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .hero-text .subtitle {
-      font-size: 1.125rem;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      margin-bottom: 16px;
-    }
-
-    .hero-text p {
-      color: var(--text-muted);
-      max-width: 600px;
-      font-size: 0.975rem;
-      margin-bottom: 24px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 16px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #090d16;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      border: 1px solid var(--card-border);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Section Styling */
-    section {
-      padding: 40px 0;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-title i {
-      color: var(--accent);
-    }
-
-    /* Grid & Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 24px;
-      backdrop-filter: blur(12px);
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
-    }
-
-    .card-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-    }
-
-    .card-tag {
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      background: rgba(56, 189, 248, 0.1);
-      color: var(--accent);
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    .card-body {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tech-badge {
-      font-size: 0.75rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 3px 10px;
-      border-radius: 20px;
-      color: #cbd5e1;
-    }
-
-    /* Interactive Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-card {
-      background: #0f172a;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      width: 90%;
-      max-width: 650px;
-      padding: 32px;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
-      }
-      .social-links {
-        justify-content: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishab C V - Interactive Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#38bdf8',
+                            purple: '#818cf8',
+                            emerald: '#34d399',
+                            rose: '#fb7185'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow:hover {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+        }
+        .tab-btn.active {
+            border-bottom: 3px solid #38bdf8;
+            color: #38bdf8;
+            font-weight: 700;
+        }
+        /* Modal Transition */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-inactive {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+        .modal-active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-  <div class="bg-glow"></div>
+    <!-- Top Navigation Bar -->
+    <nav class="sticky top-0 z-40 glass border-b border-slate-800 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-black text-xl px-3 py-1 rounded-lg shadow-lg">
+                    RCV
+                </div>
+                <span class="font-bold text-xl tracking-wider text-slate-100">Rishab C V</span>
+            </div>
+            
+            <!-- Dynamic Navigation Links -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <button onclick="switchTab('projects')" class="nav-link text-sky-400 hover:text-sky-300 transition" id="nav-projects">Projects</button>
+                <button onclick="switchTab('skills')" class="nav-link text-slate-400 hover:text-sky-300 transition" id="nav-skills">Technical & Soft Skills</button>
+                <button onclick="switchTab('experience')" class="nav-link text-slate-400 hover:text-sky-300 transition" id="nav-experience">Experience & Positions</button>
+                <button onclick="switchTab('education')" class="nav-link text-slate-400 hover:text-sky-300 transition" id="nav-education">Education & Credentials</button>
+            </div>
 
-  <div class="container">
-    <!-- HERO HEADER -->
-    <header>
-      <div class="profile-frame">
-        <img src="sya.jpeg" alt="Shreya Pulickal Anup" class="profile-img">
-      </div>
-      <div class="hero-text">
-        <h1>Shreya Pulickal Anup</h1>
-        <div class="subtitle">B.Tech CSE - AI & Robotics | VIT Chennai ('29)</div>
-        <p>
-          AI & Robotics undergraduate passionate about building intelligent systems, urban-sensing IoT platforms, and data-driven civic hardware solutions.
-        </p>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/shreyaanup/" target="_blank" class="btn btn-primary">
-            <i data-lucide="linkedin"></i> LinkedIn
-          </a>
-          <a href="mailto:ishreyaanup@gmail.com" class="btn btn-outline">
-            <i data-lucide="mail"></i> Contact Me
-          </a>
+            <!-- Contact Quick Button -->
+            <a href="mailto:contact@rishabcv.dev" class="bg-sky-500 hover:bg-sky-400 text-slate-950 px-4 py-2 rounded-lg font-semibold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-sky-500/20">
+                <i class="fa-solid me-1 fa-envelope"></i> Get In Touch
+            </a>
         </div>
-      </div>
+    </nav>
+
+    <!-- Header / Hero Section with Profile Photo -->
+    <header class="relative overflow-hidden pt-12 pb-8 border-b border-slate-800/80 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                
+                <!-- Profile Image & Bio Details -->
+                <div class="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
+                    <div class="relative group">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-sky-400 to-indigo-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                        <img src="sya.jpeg" alt="Rishab C V Photo" class="relative w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-2 border-slate-900 shadow-2xl">
+                    </div>
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 text-xs font-semibold mb-3">
+                            <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span> Student Leader & Systems Architect
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-2">
+                            Rishab C V
+                        </h1>
+                        <p class="text-lg text-slate-400 max-w-2xl">
+                            Computer Science Engineering Student at <span class="text-slate-200 font-semibold">VIT Chennai</span>. Passionate about real-time IoT architectures, predictive ML pipelines, embedded control systems, and public speaking.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Badges -->
+                <div class="grid grid-cols-2 gap-3 w-full md:w-auto">
+                    <div class="glass p-3 rounded-xl border border-slate-700/50 text-center">
+                        <span class="block text-2xl font-bold text-sky-400">4+</span>
+                        <span class="text-xs text-slate-400">Major Engineering Projects</span>
+                    </div>
+                    <div class="glass p-3 rounded-xl border border-slate-700/50 text-center">
+                        <span class="block text-2xl font-bold text-indigo-400">4</span>
+                        <span class="text-xs text-slate-400">Languages Spoken</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- PROJECTS SECTION -->
-    <section>
-      <h2 class="section-title"><i data-lucide="cpu"></i> Featured Projects & Research</h2>
-      <div class="grid">
-        
-        <!-- PRAYAAN -->
-        <div class="card" onclick="openModal('prayaan')">
-          <div class="card-header">
-            <div class="card-title">PRAYAAN</div>
-            <span class="card-tag">SIH 2026</span>
-          </div>
-          <div class="card-body">
-            AI-Powered Urban Intelligence Platform converting public buses into a mobile sensor network for air quality, road damage, and traffic congestion tracking.
-          </div>
-          <div class="tech-stack">
-            <span class="tech-badge">Python FastAPI</span>
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">Leaflet.js</span>
-            <span class="tech-badge">IoT Edge</span>
-          </div>
+    <!-- Main Dynamic Content Wrapper -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full">
+
+        <!-- ================= PROJECTS TAB ================= -->
+        <section id="tab-projects" class="tab-content space-y-8">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-sky-400"></i> Featured Engineering & Research Projects
+                    </h2>
+                    <p class="text-sm text-slate-400">Interactive overview of key hardware, software, and systems research initiatives.</p>
+                </div>
+            </div>
+
+            <!-- Project Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Project 1: PRAYAAN -->
+                <div class="glass rounded-2xl p-6 border border-slate-800 hover:border-sky-500/50 transition glow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                                SIH 2026 (PS SIH26124)
+                            </span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock me-1"></i>2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">PRAYAAN — AI-Powered Urban Intelligence Platform</h3>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Transforms Chennai's public bus fleet into a roving sensor network continuously mapping air quality, road damage, and congestion into ranked municipal work orders[cite: 2, 3].
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-microchip text-sky-400 w-4"></i>
+                                <span><strong>Edge Sensing:</strong> 5 continuous layers (GPS, AQI, Vibration, Camera, Fleet Health)[cite: 2, 3].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-network-wired text-indigo-400 w-4"></i>
+                                <span><strong>Backend Architecture:</strong> FastAPI, SQLite, REST + WebSocket, Leaflet.js dashboard[cite: 2, 3].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-emerald-400 w-4"></i>
+                                <span><strong>Synthetic Scale:</strong> 50 buses, 10 MTC routes, ~55k events/day (NumPy seed 42)[cite: 2, 3].</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex flex-wrap gap-1 text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Python 3.11</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">FastAPI</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">React 18</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">scikit-learn</span>
+                        </div>
+                        <button onclick="openModal('modal-prayaan')" class="text-xs text-sky-400 font-semibold hover:underline flex items-center gap-1">
+                            Full Specs <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2: SmartTraffic -->
+                <div class="glass rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition glow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                                VITISH 2026 (PS ID 90)
+                            </span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock me-1"></i>2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">SmartTraffic — Network-Aware Signal Controller</h3>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Adaptive traffic signal control system utilizing `predictive-pressure-v1` algorithm to forecast downstream junction capacity and prevent spillback jamming[cite: 4].
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-truck-medical text-rose-400 w-4"></i>
+                                <span><strong>Emergency Corridor:</strong> Dynamic green wave scheduler for emergency vehicles with recovery metrics[cite: 4].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-vial text-indigo-400 w-4"></i>
+                                <span><strong>Dual Simulation Engine:</strong> Deterministic 4-junction lab & SUMO/TraCI adapter[cite: 4].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-users text-amber-400 w-4"></i>
+                                <span><strong>Team Role:</strong> Leader (Architecture, Controller Design & Integration)[cite: 4].</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex flex-wrap gap-1 text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">FastAPI</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">SUMO/TraCI</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">React Control Room</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">pytest</span>
+                        </div>
+                        <button onclick="openModal('modal-smarttraffic')" class="text-xs text-indigo-400 font-semibold hover:underline flex items-center gap-1">
+                            Full Specs <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3: Smart Dustbin -->
+                <div class="glass rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition glow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                IoT & Automation System
+                            </span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock me-1"></i>2026</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Automated Smart Dustbin & Waste Classifier</h3>
+                        <p class="text-slate-300 text-sm mb-4">
+                            IoT-enabled waste management solution using sensors, Python serial integration, n8n workflow automation, and Telegram bot alerts[cite: 5].
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-hard-drive text-emerald-400 w-4"></i>
+                                <span><strong>Hardware Setup:</strong> Arduino UNO R3, Ultrasonic Sensor, Soil Moisture Sensor[cite: 5].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-amber-400 w-4"></i>
+                                <span><strong>Automated Trigger:</strong> Auto HTTP POST to n8n when fill level exceeds 75%[cite: 5].</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-earth-americas text-sky-400 w-4"></i>
+                                <span><strong>SDG Mapping:</strong> Aligns with UN SDG 3, 9, 11, and 12[cite: 5].</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex flex-wrap gap-1 text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Arduino C++</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">PySerial</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">n8n Webhooks</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Telegram API</span>
+                        </div>
+                        <button onclick="openModal('modal-dustbin')" class="text-xs text-emerald-400 font-semibold hover:underline flex items-center gap-1">
+                            Full Specs <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 4: Smart Hostel Energy Management System -->
+                <div class="glass rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition glow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                Database & System Design
+                            </span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-clock me-1"></i>Database Architecture</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Smart Hostel Energy Management System</h3>
+                        <p class="text-slate-300 text-sm mb-4">
+                            Relational schema and ER model design for tracking real-time campus power consumption, room allocations, student usage metrics, and automated billing.
+                        </p>
+                        <div class="space-y-2 mb-4 text-xs text-slate-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-database text-amber-400 w-4"></i>
+                                <span><strong>ER Schema Design:</strong> Entity sets for Rooms, Students, Smart Meters, and Utility Logs.</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-rose-400 w-4"></i>
+                                <span><strong>Optimization:</strong> Structured PL/SQL routines for surge tariff calculations and leak detection.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex flex-wrap gap-1 text-[11px]">
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">SQL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">PL/SQL</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">ER Modeling</span>
+                        </div>
+                        <button onclick="openModal('modal-er')" class="text-xs text-amber-400 font-semibold hover:underline flex items-center gap-1">
+                            View ER Diagram <i class="fa-solid fa-image"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SKILLS TAB ================= -->
+        <section id="tab-skills" class="tab-content hidden space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-gears text-sky-400"></i> Technical & Interpersonal Capabilities
+                </h2>
+                <p class="text-sm text-slate-400">Categorized expertise across programming, tools, communications, and multilingual proficiency.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Programming Languages -->
+                <div class="glass p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                            <i class="fa-solid fa-code text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Programming Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-sky-300 font-semibold text-sm">Python</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-sky-300 font-semibold text-sm">C</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-sky-300 font-semibold text-sm">C++</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-sky-300 font-semibold text-sm">Java</span>
+                    </div>
+                </div>
+
+                <!-- Web / Tools -->
+                <div class="glass p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                            <i class="fa-solid fa-laptop-code text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Web Technologies & Frameworks</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-indigo-300 font-semibold text-sm">HTML</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-indigo-300 font-semibold text-sm">React</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-indigo-300 font-semibold text-sm">TypeScript</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-indigo-300 font-semibold text-sm">FastAPI</span>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="glass p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                            <i class="fa-solid fa-database text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Databases</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-amber-300 font-semibold text-sm">SQL</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-amber-300 font-semibold text-sm">PL/SQL</span>
+                    </div>
+                </div>
+
+                <!-- Spoken Languages -->
+                <div class="glass p-6 rounded-2xl border border-slate-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+                            <i class="fa-solid fa-language text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Spoken Languages</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-emerald-300 font-semibold text-sm">English</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-emerald-300 font-semibold text-sm">Malayalam</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-emerald-300 font-semibold text-sm">Tamil</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-emerald-300 font-semibold text-sm">Hindi</span>
+                    </div>
+                </div>
+
+                <!-- Communication & Public Hosting -->
+                <div class="glass p-6 rounded-2xl border border-slate-800 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="p-3 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
+                            <i class="fa-solid fa-microphone text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Communication & Public Hosting Expertise</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                        <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-slate-200 text-sm">
+                            <i class="fa-solid fa-pen-nib text-rose-400"></i> Technical Writing
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-slate-200 text-sm">
+                            <i class="fa-solid fa-tower-broadcast text-rose-400"></i> Radio Broadcasting
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-slate-200 text-sm">
+                            <i class="fa-solid fa-headset text-rose-400"></i> Radio Hosting
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-slate-200 text-sm">
+                            <i class="fa-solid fa-comments text-rose-400"></i> Public Speaking
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-2 text-slate-200 text-sm">
+                            <i class="fa-solid fa-bullhorn text-rose-400"></i> Event MC
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-rose-500/5 border border-rose-500/20 text-xs text-rose-200/90 flex items-start gap-2">
+                        <i class="fa-solid fa-star text-rose-400 mt-0.5"></i>
+                        <span><strong>Proven Track Record:</strong> Served as Official Anchor and Master of Ceremonies (MC) during school functions and official major events, including the <strong>VIT Chennai Christmas Program</strong>.</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= EXPERIENCE TAB ================= -->
+        <section id="tab-experience" class="tab-content hidden space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-sky-400"></i> Leadership, Positions & Hackathon Milestones
+                </h2>
+                <p class="text-sm text-slate-400">Team leadership roles, competition records, and public communications history.</p>
+            </div>
+
+            <div class="relative border-l-2 border-slate-800 ml-4 space-y-8">
+
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-sky-500 ring-4 ring-slate-950"></span>
+                    <div class="glass p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white">Team Leader — Project SmartTraffic</h3>
+                            <span class="text-xs px-2.5 py-1 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">VITISH 2026 (SIH Internal)[cite: 4]</span>
+                        </div>
+                        <p class="text-sm text-slate-300 mb-3">
+                            Spearheaded team of 5 in building a working network-aware adaptive signal controller system[cite: 4]. Directed overall software architecture, algorithm design for `predictive-pressure-v1`, and integration across FastAPI backend and SUMO traffic simulation engines[cite: 4].
+                        </p>
+                        <div class="text-xs text-slate-400 flex flex-wrap gap-4">
+                            <span><i class="fa-solid fa-id-card me-1 text-sky-400"></i> Reg No: 24BCE5296[cite: 4]</span>
+                            <span><i class="fa-solid fa-building-columns me-1 text-sky-400"></i> VIT Chennai[cite: 4]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-slate-950"></span>
+                    <div class="glass p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white">Team Contributor — PRAYAAN Platform</h3>
+                            <span class="text-xs px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Smart India Hackathon 2026[cite: 2, 3]</span>
+                        </div>
+                        <p class="text-sm text-slate-300">
+                            Engineered edge-sensing data simulation scripts, FastAPI backend REST/WebSocket endpoints, and Leaflet.js live mapping pipeline for municipal work order routing[cite: 2, 3].
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-rose-500 ring-4 ring-slate-950"></span>
+                    <div class="glass p-6 rounded-2xl border border-slate-800">
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                            <h3 class="text-lg font-bold text-white">Official Event Anchor & Master of Ceremonies</h3>
+                            <span class="text-xs px-2.5 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20">VIT Chennai & Academic Institutions</span>
+                        </div>
+                        <p class="text-sm text-slate-300">
+                            Hosted major institutional gatherings, including stage hosting for <strong>VIT Chennai's Official Christmas Program</strong> and numerous school functions, delivering energetic stage management, script writing, and live audience interaction.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= EDUCATION TAB ================= -->
+        <section id="tab-education" class="tab-content hidden space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-sky-400"></i> Education & Academic Profile
+                </h2>
+                <p class="text-sm text-slate-400">Academic background and foundational studies.</p>
+            </div>
+
+            <div class="glass p-8 rounded-2xl border border-slate-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="px-2.5 py-1 rounded text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20 mb-3 inline-block">
+                        Undergraduate Student
+                    </span>
+                    <h3 class="text-2xl font-bold text-white">Bachelor of Technology in Computer Science & Engineering</h3>
+                    <p class="text-lg text-slate-300 font-medium mt-1">Vellore Institute of Technology (VIT), Chennai Campus[cite: 4]</p>
+                    <p class="text-sm text-slate-400 mt-2 max-w-xl">
+                        Focusing on core computer science subjects, algorithms, system software, relational databases, and intelligent physical infrastructure.
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center w-full md:w-auto">
+                    <i class="fa-solid fa-university text-3xl text-sky-400 mb-2"></i>
+                    <span class="block text-xs font-semibold text-slate-400">Campus Location</span>
+                    <span class="block text-sm font-bold text-slate-200">Chennai, Tamil Nadu</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Modals for Detailed Project Information -->
+
+    <!-- Modal 1: PRAYAAN Details -->
+    <div id="modal-prayaan" class="modal modal-inactive fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass bg-slate-900 max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeModal('modal-prayaan')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="px-2.5 py-1 rounded text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20 mb-2 inline-block">
+                Problem Statement SIH26124[cite: 2, 3]
+            </span>
+            <h3 class="text-2xl font-bold text-white mb-2">PRAYAAN — AI-Powered Urban Intelligence Platform</h3>
+            <p class="text-xs text-slate-400 mb-4">Category: Software | Theme: Smart Automation & Urban Mobility[cite: 2, 3]</p>
+            
+            <div class="space-y-4 text-sm text-slate-300">
+                <div>
+                    <h4 class="font-bold text-sky-400 text-base mb-1">Concept & Core Value</h4>
+                    <p>Turns Chennai's public bus fleet into a moving sensor network[cite: 2, 3]. Edge modules on-board each bus run lightweight ML inference and stream classified events to a central backend for live urban governance[cite: 2, 3].</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sky-400 text-base mb-1">5 Layers of Route Sensing[cite: 2, 3]</h4>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li><strong>GPS & Congestion:</strong> Real-time positions and delay heatmaps[cite: 2, 3].</li>
+                        <li><strong>Air Quality (AQI):</strong> Continuous mapping of PM2.5, PM10, NO₂, CO, O₃[cite: 2, 3].</li>
+                        <li><strong>Potholes:</strong> Vibration-ML classifier with GPS tagging[cite: 2, 3].</li>
+                        <li><strong>Civic Issues:</strong> Vision-based waterlogging and street light fault flags[cite: 2, 3].</li>
+                        <li><strong>Fleet Health:</strong> Battery and module uptime heartbeats[cite: 2, 3].</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sky-400 text-base mb-1">Architecture & Data Scale[cite: 2, 3]</h4>
+                    <p>FastAPI Backend (Port 8000) handling REST + WebSockets connected to SQLite (`prayaan.db`) and React Leaflet.js dashboard[cite: 2, 3]. Simulated using 50 buses across 10 MTC Chennai routes generating ~55,000 events/day[cite: 2, 3].</p>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('modal-prayaan')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-semibold">Close</button>
+            </div>
         </div>
-
-        <!-- SmartTraffic -->
-        <div class="card" onclick="openModal('smarttraffic')">
-          <div class="card-header">
-            <div class="card-title">SmartTraffic</div>
-            <span class="card-tag">VITISH 2026</span>
-          </div>
-          <div class="card-body">
-            Network-Aware Signal Control using downstream forecasting, emergency corridor scheduling, and SUMO/TraCI validation.
-          </div>
-          <div class="tech-stack">
-            <span class="tech-badge">SUMO/TraCI</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">Benchmarking</span>
-          </div>
-        </div>
-
-        <!-- Smart Dustbin -->
-        <div class="card" onclick="openModal('dustbin')">
-          <div class="card-header">
-            <div class="card-title">Smart Dustbin</div>
-            <span class="card-tag">MDP Project</span>
-          </div>
-          <div class="card-body">
-            IoT waste-monitoring system with fill-level ultrasonic sensing, wet/dry waste classification, and automated Telegram webhooks.
-          </div>
-          <div class="tech-stack">
-            <span class="tech-badge">Arduino UNO</span>
-            <span class="tech-badge">PySerial</span>
-            <span class="tech-badge">n8n</span>
-            <span class="tech-badge">Telegram API</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TECHNICAL SKILLS -->
-    <section>
-      <h2 class="section-title"><i data-lucide="code"></i> Technical Stack</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-title" style="margin-bottom: 12px;">Languages & Web</div>
-          <div class="tech-stack">
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">C</span>
-            <span class="tech-badge">C++</span>
-            <span class="tech-badge">Java</span>
-            <span class="tech-badge">HTML/CSS</span>
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">TypeScript</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title" style="margin-bottom: 12px;">Systems & Systems Engineering</div>
-          <div class="tech-stack">
-            <span class="tech-badge">SQL</span>
-            <span class="tech-badge">PL/SQL</span>
-            <span class="tech-badge">FastAPI</span>
-            <span class="tech-badge">IoT & Robotics</span>
-            <span class="tech-badge">REST APIs</span>
-            <span class="tech-badge">WebSockets</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACHIEVEMENTS & CERTIFICATIONS -->
-    <section>
-      <h2 class="section-title"><i data-lucide="award"></i> Honors & Leadership</h2>
-      <div class="card">
-        <ul style="list-style-type: none; padding-left: 0; color: var(--text-muted);">
-          <li style="margin-bottom: 8px;">🎓 <strong>UAE Golden Visa</strong> recipient for academic excellence.</li>
-          <li style="margin-bottom: 8px;">🚀 <strong>NASA Astronaut Boot Camp</strong> 4-day intensive attendee.</li>
-          <li style="margin-bottom: 8px;">🏆 <strong>HackTheGap Hackathon</strong> participant (Sahayatha Club, VIT Chennai).</li>
-          <li style="margin-bottom: 8px;">⭐ Scholar Badge recipient for 7 consecutive years & ASSET Top 10% UAE.</li>
-        </ul>
-      </div>
-    </section>
-  </div>
-
-  <!-- MODAL FOR DETAILED PROJECT DETAILS -->
-  <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
-    <div class="modal-card">
-      <button class="close-btn" onclick="hideModal()"><i data-lucide="x"></i></button>
-      <div id="modalContent"></div>
     </div>
-  </div>
 
-  <script>
-    lucide.createIcons();
+    <!-- Modal 2: SmartTraffic Details -->
+    <div id="modal-smarttraffic" class="modal modal-inactive fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass bg-slate-900 max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeModal('modal-smarttraffic')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="px-2.5 py-1 rounded text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2 inline-block">
+                VITISH 2026 Problem Statement ID 90[cite: 4]
+            </span>
+            <h3 class="text-2xl font-bold text-white mb-2">SmartTraffic — Network-Aware Signals</h3>
+            <p class="text-xs text-slate-400 mb-4">Team Leader: Rishab C V (24BCE5296)[cite: 4]</p>
+            
+            <div class="space-y-4 text-sm text-slate-300">
+                <div>
+                    <h4 class="font-bold text-indigo-400 text-base mb-1">Core Innovation (`predictive-pressure-v1`)[cite: 4]</h4>
+                    <p>Unlike traditional local adaptive signals that move queues to the next junction, our algorithm forecasts downstream capacity with a downstream penalty of 0.45 and trend weight of 0.8 to prevent corridor gridlock[cite: 4].</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-indigo-400 text-base mb-1">Key Systems Built[cite: 4]</h4>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li><strong>Emergency Green Corridor:</strong> Dynamic lead/hold timing for ambulances with measured post-pass recovery[cite: 4].</li>
+                        <li><strong>Dual Engine Architecture:</strong> Deterministic 4-junction lab + SUMO/TraCI microscopic simulator[cite: 4].</li>
+                        <li><strong>Live Control Room:</strong> React/Vite dashboard displaying network congestion heatmaps, +15-tick forecasts, and throughput[cite: 4].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('modal-smarttraffic')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
 
-    const projectData = {
-      prayaan: {
-        title: "PRAYAAN — Urban Intelligence Platform",
-        content: "<p style='color:#94a3b8; margin-bottom: 12px;'>Contributed to an AI-powered urban sensing platform converting municipal buses into mobile environmental scanners.</p><ul style='color:#cbd5e1; font-size:0.9rem; line-height: 1.7;'><li>Continuous mapping of air quality (AQI), road damage, and traffic bottlenecks.</li><li>FastAPI backend handling real-time WebSocket streams & Leaflet analytics dashboards.</li></ul>"
-      },
-      smarttraffic: {
-        title: "SmartTraffic — Signal Control",
-        content: "<p style='color:#94a3b8; margin-bottom: 12px;'>Worked on research, benchmark documentation, and impact analysis for an adaptive traffic signal prototype.</p><ul style='color:#cbd5e1; font-size:0.9rem; line-height: 1.7;'><li>Evaluated downstream traffic forecasting and emergency green-wave scheduling.</li><li>Validated performance claims using SUMO/TraCI microscopic traffic simulations.</li></ul>"
-      },
-      dustbin: {
-        title: "Smart Dustbin — IoT Automation",
-        content: "<p style='color:#94a3b8; margin-bottom: 12px;'>Designed an automated waste management prototype with live webhook alerts.</p><ul style='color:#cbd5e1; font-size:0.9rem; line-height: 1.7;'><li>Arduino UNO R3 connected to ultrasonic and soil moisture sensors.</li><li>Python PySerial monitoring triggering n8n webhooks & automated Telegram alerts at 75% fill capacity.</li></ul>"
-      }
-    };
+    <!-- Modal 3: Smart Dustbin Details -->
+    <div id="modal-dustbin" class="modal modal-inactive fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass bg-slate-900 max-w-3xl w-full max-h-[90vh] overflow-y-auto rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeModal('modal-dustbin')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="px-2.5 py-1 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2 inline-block">
+                Project Report Summary (April 2026)[cite: 5]
+            </span>
+            <h3 class="text-2xl font-bold text-white mb-2">Smart Dustbin Automation System</h3>
+            <p class="text-xs text-slate-400 mb-4">Guided by Dr. G Sudhakaran | VIT Chennai[cite: 5]</p>
+            
+            <div class="space-y-4 text-sm text-slate-300">
+                <div>
+                    <h4 class="font-bold text-emerald-400 text-base mb-1">Hardware & Working Mechanics[cite: 5]</h4>
+                    <p>Integrates Arduino UNO R3 with an ultrasonic sensor (fill level calculation) and soil moisture sensor (wet vs dry waste classification based on electrical conductivity)[cite: 5].</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-emerald-400 text-base mb-1">Automation Workflow[cite: 5]</h4>
+                    <p>Serial data from Arduino is read via Python (PySerial)[cite: 5]. When fill level reaches ≥75%, Python sends an HTTP POST request to an n8n webhook, which routes real-time alert messages via Telegram Bot API[cite: 5].</p>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('modal-dustbin')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
 
-    function openModal(id) {
-      const data = projectData[id];
-      document.getElementById('modalContent').innerHTML = `<h3 style="font-size: 1.3rem; margin-bottom: 12px; color: var(--text);">${data.title}</h3>${data.content}`;
-      document.getElementById('projectModal').style.display = 'flex';
-    }
+    <!-- Modal 4: ER Model Display -->
+    <div id="modal-er" class="modal modal-inactive fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="glass bg-slate-900 max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl p-6 border border-slate-700 shadow-2xl relative">
+            <button onclick="closeModal('modal-er')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="px-2.5 py-1 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-2 inline-block">
+                Database Architecture
+            </span>
+            <h3 class="text-2xl font-bold text-white mb-4">Smart Hostel Energy Management System — ER Model</h3>
+            <div class="rounded-xl overflow-hidden border border-slate-700 bg-slate-950 p-2 mb-4 flex justify-center">
+                <!-- Render Attached ER Diagram Image -->
+                <img src="ER Model.jpeg" alt="Smart Hostel Energy Management System ER Model" class="max-h-[60vh] object-contain rounded-lg">
+            </div>
+            <p class="text-xs text-slate-400">
+                Entity-Relationship Diagram illustrating relational mapping for hostel power meters, consumption logs, student billing, and automated surge threshold notifications.
+            </p>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button onclick="closeModal('modal-er')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
 
-    function hideModal() {
-      document.getElementById('projectModal').style.display = 'none';
-    }
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                © 2026 Rishab C V. Designed for high interactivity & visual presentation.
+            </div>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="https://github.com/rishabcv-eng" target="_blank" class="hover:text-sky-400 transition"><i class="fa-brands fa-github text-lg"></i></a>
+                <a href="mailto:contact@rishabcv.dev" class="hover:text-sky-400 transition"><i class="fa-solid fa-envelope text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
 
-    function closeModal(e) {
-      if (e.target.id === 'projectModal') hideModal();
-    }
-  </script>
+    <!-- Interactive Scripting -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabName) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Deactivate all nav links
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('text-sky-400', 'font-bold');
+                el.classList.add('text-slate-400');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+            // Highlight selected nav link
+            const activeNav = document.getElementById('nav-' + tabName);
+            if(activeNav) {
+                activeNav.classList.add('text-sky-400', 'font-bold');
+                activeNav.classList.remove('text-slate-400');
+            }
+        }
+
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('modal-inactive');
+                modal.classList.add('modal-active');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-inactive');
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(m => {
+                    m.classList.remove('modal-active');
+                    m.classList.add('modal-inactive');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
