@@ -57,35 +57,18 @@
 
     /* Header / Hero Section */
     header {
-      padding: 80px 0 60px;
-      display: flex;
-      align-items: center;
-      gap: 48px;
-    }
-
-    .profile-frame {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .profile-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 25px var(--accent-glow);
+      padding: 80px 0 50px;
     }
 
     .hero-text h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
 
     .hero-text .subtitle {
-      font-size: 1.125rem;
+      font-size: 1.15rem;
       color: var(--accent);
       font-family: var(--font-mono);
       margin-bottom: 16px;
@@ -93,8 +76,8 @@
 
     .hero-text p {
       color: var(--text-muted);
-      max-width: 600px;
-      font-size: 0.975rem;
+      max-width: 680px;
+      font-size: 1rem;
       margin-bottom: 24px;
     }
 
@@ -168,6 +151,7 @@
       padding: 24px;
       backdrop-filter: blur(12px);
       transition: transform 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -255,12 +239,10 @@
     /* Responsive */
     @media (max-width: 768px) {
       header {
-        flex-direction: column;
-        text-align: center;
-        gap: 24px;
+        text-align: left;
       }
       .social-links {
-        justify-content: center;
+        justify-content: flex-start;
       }
     }
   </style>
@@ -272,9 +254,6 @@
   <div class="container">
     <!-- HERO HEADER -->
     <header>
-      <div class="profile-frame">
-        <img src="WhatsApp Image 2026-09-17 at 1.05.34 PM.jpeg" alt="Shreya Pulickal Anup" class="profile-img">
-      </div>
       <div class="hero-text">
         <h1>Shreya Pulickal Anup</h1>
         <div class="subtitle">B.Tech CSE - AI & Robotics | VIT Chennai ('29)</div>
